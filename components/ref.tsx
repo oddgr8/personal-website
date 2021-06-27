@@ -8,7 +8,7 @@ export default function RefComponent({
   // TODO: Render videos differently
   return (
     <div>
-      <a href={link.toString()} target="blank">
+      <a href={link.toString()} target="_blank" rel="noreferrer">
         <h1>{title}</h1>
         <h2>{date}</h2>
         {description}

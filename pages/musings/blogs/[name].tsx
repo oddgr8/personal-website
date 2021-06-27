@@ -12,7 +12,7 @@ export default function BlogArticle({ title, date, html, description }: Blog) {
           description: description,
           type: "article",
           article: {
-            publishedTime: date.toISOString(),
+            publishedTime: date.toString(),
             authors: ["Onkar Deshpande"],
           },
         }}

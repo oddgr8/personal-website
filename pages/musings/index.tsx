@@ -14,9 +14,9 @@ import {
 export default function BlogList({ musings }: { musings: Musing[] }) {
   return (
     <>
-      {musings.map((musing: Musing): ReactNode => {
+      {musings.map((musing: Musing, idx: number): ReactNode => {
         return (
-          <div key={musing.id}>
+          <div key={idx}>
             {musing.type == "blog" ? (
               <BlogLinkComponent data={musing as BlogLink} />
             ) : musing.type == "quote" ? (

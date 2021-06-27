@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <header>
         <Link href="/">
-          <a>OD</a>
+          <a>Onkar D.</a>
         </Link>
         <Link href="/musings">
           <a>Musings</a>

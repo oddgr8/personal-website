@@ -24,11 +24,11 @@ const getFileMatter = (filename: string): matter.GrayMatterFile<matter.Input> =>
 interface MusingBase {
   date: Date;
   description?: string;
-  id: string;
   type: "blog" | "ref" | "quote";
 }
 
 export interface BlogLink extends MusingBase {
+  id: string;
   title: string;
 }
 export interface Blog extends Omit<BlogLink, "id" | "type"> {
@@ -59,14 +59,12 @@ export function GetAllMusingsSorted(): Musing[] {
       fs.readdirSync(quoteDir).map(
         (filename: string): Quote => ({
           ...(getFileMatter(path.join("quotes", filename)).data as Quote),
-          id: filename.replace(/\.md$/, ""),
           type: "quote",
         })
       ),
       fs.readdirSync(refDir).map(
         (filename: string): Ref => ({
           ...(getFileMatter(path.join("refs", filename)).data as Ref),
-          id: filename.replace(/\.md$/, ""),
           type: "ref",
         })
       )
