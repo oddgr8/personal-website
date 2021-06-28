@@ -1,4 +1,5 @@
 import { Quote } from "../lib/musings";
+import { Typography, Container } from "@material-ui/core";
 
 export default function QuoteComponent({
   data: { content, writer, date },
@@ -6,10 +7,10 @@ export default function QuoteComponent({
   data: Quote;
 }) {
   return (
-    <div>
-      <h1>{content}</h1>
-      <h2>{writer}</h2>
-      <h2>{date}</h2>
-    </div>
+    <Container>
+      <Typography variant="h4">{content}</Typography>
+      <Typography variant="caption">{date}</Typography>
+      <Typography variant="subtitle1">{writer}</Typography>
+    </Container>
   );
 }

@@ -1,3 +1,4 @@
+import { Container, Grid } from "@material-ui/core";
 import { GetStaticProps } from "next";
 import { ReactNode } from "react";
 import BlogLinkComponent from "../../components/blogLink";
@@ -13,21 +14,21 @@ import {
 
 export default function BlogList({ musings }: { musings: Musing[] }) {
   return (
-    <>
+    <Grid container direction="column" spacing={5}>
       {musings.map((musing: Musing, idx: number): ReactNode => {
         return (
-          <div key={idx}>
-            {musing.type == "blog" ? (
-              <BlogLinkComponent data={musing as BlogLink} />
-            ) : musing.type == "quote" ? (
-              <QuoteComponent data={musing as Quote} />
-            ) : musing.type == "ref" ? (
-              <RefComponent data={musing as Ref} />
-            ) : null}
-          </div>
+          <Grid item key={idx}>
+              {musing.type == "blog" ? (
+                <BlogLinkComponent data={musing as BlogLink} />
+              ) : musing.type == "quote" ? (
+                <QuoteComponent data={musing as Quote} />
+              ) : musing.type == "ref" ? (
+                <RefComponent data={musing as Ref} />
+              ) : null}
+          </Grid>
         );
       })}
-    </>
+    </Grid>
   );
 }
 

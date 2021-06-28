@@ -1,4 +1,6 @@
 import { Ref } from "../lib/musings";
+import Link from "./link";
+import { Container, Typography } from "@material-ui/core";
 
 export default function RefComponent({
   data: { title, link, date, description },
@@ -7,12 +9,12 @@ export default function RefComponent({
 }) {
   // TODO: Render videos differently
   return (
-    <div>
-      <a href={link.toString()} target="_blank" rel="noreferrer">
-        <h1>{title}</h1>
-        <h2>{date}</h2>
-        {description}
-      </a>
-    </div>
+    <Link href={link.toString()}>
+      <Container component="a">
+        <Typography variant="h4">{title}</Typography>
+        <Typography variant="caption">{date}</Typography>
+        <Typography variant="subtitle1">{description}</Typography>
+      </Container>
+    </Link>
   );
 }

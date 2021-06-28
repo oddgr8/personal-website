@@ -1,5 +1,6 @@
 import { BlogLink } from "../lib/musings";
-import Link from "next/link";
+import Link from "./link";
+import { Typography, Container } from "@material-ui/core";
 
 export default function BlogLinkComponent({
   data: { title, date, id, description },
@@ -7,14 +8,12 @@ export default function BlogLinkComponent({
   data: BlogLink;
 }) {
   return (
-    <>
-      <Link href={"musings/blogs/" + id}>
-        <a>
-          <h1>{title}</h1>
-          <h2>{date}</h2>
-          {description}
-        </a>
-      </Link>
-    </>
+    <Link internal href={"musings/blogs/" + id}>
+      <Container component="a">
+        <Typography variant="h4">{title}</Typography>
+        <Typography variant="caption">{date}</Typography>
+        <Typography variant="subtitle1">{description}</Typography>
+      </Container>
+    </Link>
   );
 }
