@@ -3,7 +3,7 @@ import Contact from "./contact";
 import { makeStyles } from "@material-ui/core/styles";
 import { Toolbar, Container, Grid } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   toolbarTop: {
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   main: {
     display: `flex`,
-    minHeight: `85vh`,
+    minHeight: `75vh`,
     flexDirection: `column`,
   },
 }));
@@ -31,6 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
         </Grid>
       </Toolbar>
+      <Toolbar />
       <Container component={"main"} className={classes.main}>
         <>{children}</>
       </Container>

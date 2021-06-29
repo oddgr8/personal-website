@@ -1,15 +1,14 @@
-import Head from "next/head";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { Blog, GetAllBlogNames, getBlogData } from "../../../lib/musings";
 import { NextSeo } from "next-seo";
+import { Typography, Container } from "@material-ui/core";
 
-export default function BlogArticle({ title, date, html, description }: Blog) {
+export default function BlogArticle({ title, date, html }: Blog) {
   return (
     <>
       <NextSeo
         openGraph={{
           title: title,
-          description: description,
           type: "article",
           article: {
             publishedTime: date.toString(),
@@ -17,9 +16,13 @@ export default function BlogArticle({ title, date, html, description }: Blog) {
           },
         }}
       />
-      {title}
-      {date}
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <Container maxWidth="md">
+        <Typography variant="h4">{title}</Typography>
+        <Typography variant="caption">{date}</Typography>
+        <Typography variant="subtitle1">
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+        </Typography>
+      </Container>
     </>
   );
 }

@@ -23,49 +23,47 @@ const getFileMatter = (filename: string): matter.GrayMatterFile<matter.Input> =>
 
 interface MusingBase {
   date: Date;
-  description?: string;
-  type: "blog" | "ref" | "quote";
+  type: "blog" | "quote";
 }
 
 export interface BlogLink extends MusingBase {
+  // id is filename for internal blogs. Link otherwise.
+  // Determined if md file already has id
   id: string;
   title: string;
+  internal: boolean;
+  description?: string;
 }
-export interface Blog extends Omit<BlogLink, "id" | "type"> {
+export interface Blog {
+  date: Date;
+  title: string;
   html: string;
 }
 export interface Quote extends MusingBase {
   content: string;
   writer: string;
 }
-export interface Ref extends MusingBase {
-  title: string;
-  link: URL;
-}
 
-export type Musing = BlogLink | Quote | Ref;
+export type Musing = BlogLink | Quote;
 
 export function GetAllMusingsSorted(): Musing[] {
   var result: Musing[] = [];
   return result
     .concat(
-      fs.readdirSync(blogDir).map(
-        (filename: string): BlogLink => ({
-          ...(getFileMatter(path.join("blogs", filename)).data as BlogLink),
-          id: filename.replace(/\.md$/, ""),
-          type: "blog",
-        })
-      ),
+      fs.readdirSync(blogDir).map((filename: string): BlogLink => {
+        const data = getFileMatter(path.join("blogs", filename)).data;
+        data.type = "blog";
+        data.internal = false;
+        if (!data.id) {
+          data.id = filename.replace(/\.md$/, "");
+          data.internal = true;
+        }
+        return data as BlogLink;
+      }),
       fs.readdirSync(quoteDir).map(
         (filename: string): Quote => ({
           ...(getFileMatter(path.join("quotes", filename)).data as Quote),
           type: "quote",
-        })
-      ),
-      fs.readdirSync(refDir).map(
-        (filename: string): Ref => ({
-          ...(getFileMatter(path.join("refs", filename)).data as Ref),
-          type: "ref",
         })
       )
     )
@@ -81,9 +79,12 @@ export function GetAllMusingsSorted(): Musing[] {
 export function GetAllBlogNames(): {
   params: { name: string };
 }[] {
-  return fs.readdirSync(blogDir).map((fileName) => ({
-    params: { name: fileName.replace(/\.md$/, "") },
-  }));
+  return fs
+    .readdirSync(blogDir)
+    .filter((filename) => !getFileMatter(path.join("blogs", filename)).data.id)
+    .map((fileName) => ({
+      params: { name: fileName.replace(/\.md$/, "") },
+    }));
 }
 
 export function getBlogData(name: string): Blog {
