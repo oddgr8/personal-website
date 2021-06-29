@@ -36,7 +36,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <>{children}</>
       </Container>
       <Toolbar className={classes.toolbarBottom}>
-        <Contact />
+        <Grid container justify="center" alignItems="center">
+          <Contact />
+        </Grid>
       </Toolbar>
     </Container>
   );

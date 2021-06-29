@@ -8,7 +8,7 @@ export default function Contact() {
     color: "secondary" as "secondary",
   };
   return (
-    <Grid container justify="center" alignItems="center">
+    <>
       <Button href="/resume.pdf" variant="contained" {...commonProps}>
         Resume
       </Button>
@@ -30,6 +30,6 @@ export default function Contact() {
       <IconButton href="https://github.com/oddgr8" {...commonProps}>
         <GitHub fontSize="large" />
       </IconButton>
-    </Grid>
+    </>
   );
 }
