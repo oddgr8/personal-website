@@ -9,15 +9,6 @@ const blogDir = path.join(musingsDir, "blogs");
 const quoteDir = path.join(musingsDir, "quotes");
 const refDir = path.join(musingsDir, "refs");
 
-const blogsFileList = (): string[] =>
-  fs.readdirSync(blogDir).map((val: string): string => path.join("blogs", val));
-const quotesFileList = (): string[] =>
-  fs
-    .readdirSync(quoteDir)
-    .map((val: string): string => path.join("quotes", val));
-const refsFileList = (): string[] =>
-  fs.readdirSync(refDir).map((val: string): string => path.join("refs", val));
-
 const getFileMatter = (filename: string): matter.GrayMatterFile<matter.Input> =>
   matter(fs.readFileSync(path.join(musingsDir, filename), "utf-8"));
 

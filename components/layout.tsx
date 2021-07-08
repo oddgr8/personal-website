@@ -1,16 +1,16 @@
 import Link from "./link";
 import Contact from "./contact";
 import { makeStyles } from "@material-ui/core/styles";
-import { Toolbar, Container, Grid } from "@material-ui/core";
+import {
+  Toolbar,
+  Container,
+  Grid,
+  Divider,
+  Typography,
+} from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
-  toolbarTop: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbarBottom: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-  },
-  main: {
+  section: {
     display: `flex`,
     minHeight: `75vh`,
     flexDirection: `column`,
@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const classes = useStyles();
   return (
     <Container maxWidth="lg">
-      <Toolbar className={classes.toolbarTop}>
+      <Toolbar>
         <Grid container alignItems={"flex-end"} justify={"space-between"}>
           <Link internal href="/" variant="h4">
             OD.
@@ -31,13 +31,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
         </Grid>
       </Toolbar>
+      <Divider variant="middle" />
       <Toolbar />
-      <Container component={"main"} className={classes.main}>
+      <Container component={"main"} className={classes.section}>
         <>{children}</>
       </Container>
-      <Toolbar className={classes.toolbarBottom}>
-        <Grid container justify="center" alignItems="center">
-          <Contact />
+      <Divider variant="middle" />
+      <Toolbar>
+        <Grid container justify="center" alignItems="center" direction="column">
+          {/* <Grid item>
+            <Typography variant="h6">
+              Liked what you saw? Get in touch
+            </Typography>
+          </Grid> */}
+          <Grid item>
+            <Contact />
+          </Grid>
         </Grid>
       </Toolbar>
     </Container>
